@@ -19,8 +19,9 @@ python3 -c "import lambdata_tclack; print('success')"
 
 (This takes a few minutes)
 
-4. Run the docker image/environment to ver
-sudo docker run -it lambdata /bin/bash
+4. Run the docker image/environment to verify
+
+`sudo docker run -it lambdata /bin/bash`
 
 
 5. opened a python3 interpreter and tested my module
