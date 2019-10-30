@@ -2,7 +2,7 @@
 
 1. Created an empty directory I called `dockertest`
 
-2. Created a docker file `Dockerfile` with the following content
+2. `cd` into that new directory. Created a docker file `Dockerfile` with the following content
 ```docker
 FROM debian
 ENV PYTHONUNBUFFERED=1
