@@ -1,0 +1,11 @@
+1. update setup.py version number
+
+2. (verify, this may not be needed) remove the build, dist and egg directories.
+
+3. rebuild 
+python setup.py sdist bdist_wheel
+
+4. upload (twine must be installed)
+
+twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
