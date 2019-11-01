@@ -14,20 +14,31 @@ class Product:
     def stealability(self):
         price_weight_ratio = self.price/self.weight
         if price_weight_ratio < .5:
-            print('Not so stealable...')
+            stealability_desc = 'Not so stealable...'
+            print(stealability_desc)
+            return(stealability_desc)
         elif price_weight_ratio < 1:
-            print('Kinda stealable.')
+            stealability_desc = 'Kinda stealable.'
+            print(stealability_desc)
+            return(stealability_desc)
+
         else:
-            print('very stealable!')
+            stealability_desc = 'very stealable!'
+            print(stealability_desc)
+            return(stealability_desc)
+
 
     def explode(self):
         explosion_factor = self.flammability * self.weight
         if explosion_factor < 10:
             print("...fizzle")
+            return "...fizzle" 
         elif explosion_factor < 50:
             print("...boom!")
+            return "...boom!"
         else:
             print("...BABOOM! !")
+            return "...BABOOM! !"
 
 
 class BoxingGlove(Product):

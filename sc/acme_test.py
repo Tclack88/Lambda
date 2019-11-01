@@ -4,7 +4,7 @@
 import unittest
 from acme import Product
 from acme_report import generate_products, ADJECTIVES, ITEMS
-
+from random import randint
 
 class AcmeProductTests(unittest.TestCase):
     """Making sure Acme products are the tops!"""
@@ -20,13 +20,13 @@ class AcmeProductTests(unittest.TestCase):
         prices = [Product('test').price for _ in range(100)]
         self.assertTrue(max(prices) <= 100)
 
-    def stealability_words_present(self):
+    def test_stealability_words_present(self):
         """Test presence of all 3 possible stealability explanations
         (only ['Not so stealable...','Kinda stealable.','very stealable!'] allowed)"""
         print("testing stealability words...")
         possible_stealability_words = ['Not so stealable...',
                 'Kinda stealable.','very stealable!']
-        stealability_output = [Product('test',).stealability() for _ in range(100)]
+        stealability_output = [Product("test",randint(1,100),randint(1,100)).stealability() for _ in range(100)]
         stealability_output = list(set(stealability_output)) # return only unique output
         for result in stealability_output:
             self.assertTrue(result in possible_stealability_words)
