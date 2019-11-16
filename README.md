@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Lambda
 a collection of Lambda school curriculum an related projects
 =======
@@ -22,3 +23,6 @@ Lecture and assignment notebooks for Data Science Unit 1 Sprint 3
 =======
 # DS-Unit-2-Kaggle-Challenge
 >>>>>>> tmptmp_FXyKv2VVcV/master
+=======
+# DS-Unit-2-Applied-Modeling
+>>>>>>> tmptmp_q0GmFuIQye/master
