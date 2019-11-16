@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Lambda
 a collection of Lambda school curriculum an related projects
 =======
@@ -9,3 +10,7 @@ Notebooks, assignments, and sprint challenge for Data Science Unit 1 Sprint 1
 =======
 # DS-Unit-1-Sprint-2-Data-Wrangling-and-Storytelling
 >>>>>>> tmptmp_K1YYRhQK9m/master
+=======
+# DS-Sprint-03-Statistical-Tests-and-Experiments
+Lecture and assignment notebooks for Data Science Unit 1 Sprint 3
+>>>>>>> tmptmp_WcqWVkzkGf/master
