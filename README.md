@@ -5,6 +5,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Lambda
 a collection of Lambda school curriculum an related projects
 =======
@@ -51,3 +52,7 @@ fork and open a PR to this repo, and edit this file to link to your lambdata.
 
 **My lambdata repository**: *you edit here*
 >>>>>>> tmptmp_XQb53aLzaN/master
+=======
+# DS-Unit-3-Sprint-2-SQL-and-Databases
+SQL and Databases for Data Science
+>>>>>>> tmptmp_XcItBrdX69/master
