@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Lambda
 a collection of Lambda school curriculum an related projects
 =======
@@ -14,3 +15,6 @@ Notebooks, assignments, and sprint challenge for Data Science Unit 1 Sprint 1
 # DS-Sprint-03-Statistical-Tests-and-Experiments
 Lecture and assignment notebooks for Data Science Unit 1 Sprint 3
 >>>>>>> tmptmp_WcqWVkzkGf/master
+=======
+# DS-Unit-2-Regression-Classification
+>>>>>>> tmptmp_WxRYVzaAGg/master

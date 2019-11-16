@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# macOS Desktop Services Store
+.DS_Store
+
+>>>>>>> tmptmp_WxRYVzaAGg/master
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
