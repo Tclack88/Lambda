@@ -9,6 +9,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Lambda
 a collection of Lambda school curriculum an related projects
 =======
@@ -103,3 +104,7 @@ This week we will review several popular feed-forward neural network architectur
       2. Know the important research achievements in AI
       3. Delineate the ethnical challenges faces AI
 >>>>>>> tmptmp_oLdzZwJd5l/master
+=======
+# AB-Demo
+Simple front-end A/B experiment - [view it live!](https://Tclack88.github.io/AB-Demo/)
+>>>>>>> tmptmp_GySmzlCpCG/master
