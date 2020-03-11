@@ -5,12 +5,14 @@
 x = 12
 
 def change_x():
+    global x
     x = 99
 
 change_x()
 
 # This prints 12. What do we have to modify in change_x() to get it to print 99?
 print(x)
+print("must add 'global x' to the function\n")
 
 
 # This nested function has a similar problem.
@@ -19,6 +21,7 @@ def outer():
     y = 120
 
     def inner():
+        nonlocal y
         y = 999
 
     inner()
@@ -30,3 +33,4 @@ def outer():
 
 
 outer()
+print("must add 'nonlocal y' to the function")
