@@ -1,4 +1,6 @@
+import os
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -49,3 +51,25 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+player = Player('test player', room['outside'])
+
+#player.current_room = room['outside'] # Maybe unecessary, set this to default
+resp = 'the game has begun' # Filler start, doesn't actually matter
+while resp != 'q':
+    
+    print(f"Current room:{player.current_room.name} \
+            \n{player.current_room.description}")
+    print("\nIn which direction would you like to head traveller?")
+    resp = input('\tn\nw\t\te\tq(quit)\n\ts\t\t\t: ')
+    if eval(f'player.current_room.{resp}_to') != None:
+        print("OUTPUT:")
+        print(eval(f'player.current_room.{resp}_to'))
+        exec(f'player.current_room = player.current_room.{resp}_to')
+    elif resp == 'q':
+        print("Goodbye for now")
+        continue
+    else:
+        os.system('clear')
+        print('invalid option, try again...')
+
+
