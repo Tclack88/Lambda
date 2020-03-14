@@ -89,7 +89,7 @@ while resp[0] != 'q':
     print("\nIn which direction would you like to head traveller?")
     # Give a GUI for actions and movement
     print(f"""
-        n       i(inventory - {len(player.items)}       ACTIONS         NOUNS
+        n       i(inventory - {len(player.items)})       ACTIONS         NOUNS
     w       e   q(quit)             (take, drop)      (item)
         s""")
     resp = input("~~~~~~~~~~~: ")
