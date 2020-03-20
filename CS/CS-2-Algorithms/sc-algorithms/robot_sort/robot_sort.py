@@ -107,19 +107,35 @@ class SortingRobot:
             if self.can_move_right():
                 print('can move right!')
                 while self.can_move_right():
-                    if self.compare_item(): # while moving right, swap if item is larger
+                    print('my item is',self._item,'\n comparing with',self._list[self._position])
+                    print(self.compare_item())
+                    if self.compare_item() == -1: # while moving right, swap if item is larger
                         self.swap_item()
                         print('swap occured:', self._list)
                         self.set_light_on() # on for "True" a swap occured
+                    #elif self.compare_item() == None and self.light_is_on():
+                    #    break
                     self.move_right()
+                    print('moved R')
+                if self.compare_item() != None:
+                    self.swap_item()
+
+
             elif self.can_move_left():
                 print('can move left!')
                 while self.can_move_left():
-                    if self.compare_item() == -1: # if item is smaller(or equal),
+                    print(self.compare_item())
+                    if self.compare_item() == 1: # if item is smaller(or equal),
+                        print('my item is',self._item,'\n comparing with',self._list[self._position])
                         self.swap_item()        # this if returns True and makes swap
                         print('swap occured:', self._list)
                         self.set_light_on()
+                    #elif self.compare_item() == None and self.light_is_on():
+                    #    break
                     self.move_left()
+                    print('moved L')
+                if self.compare_item() != None:
+                    self.swap_item()
 
         self.swap_item()
         return self._list
