@@ -2,17 +2,18 @@
 
 ## Exercise I
 
-a)  O(n^2)
+a)  O(n)
 
 in this, `a` is essentially taking a step of n^2 until it gets to n^3. The sum of this is:
 
-n^2 + 2n^2 + 3n^3 + ... + nn^2
+after the first loop a will be n^2, after the 2nd loop, 2n^2 ... etc., but the loop
+is only n in length, each time a is incremented, it's one operation so this is
 
-= n^2 (1 + 2 + 3 + ... + n)
+1 + 1 + 1 + .... + 1   <----- n times
 
-= n^2 ( 1/2(n^2 + n) )  ~  3/2n^2
+= n
 
-~ O(n^2)
+= O(n)
 
 
 b) O(nlog(n))
