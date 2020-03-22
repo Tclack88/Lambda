@@ -107,17 +107,18 @@ class SortingRobot:
         while self.light_is_on(): # If light is on it means a swap occured because list
                                   # was not sorted
             while self.can_move_right():
-                if self.compare_item() in [-1, None]:   # while moving right, swap
+                if self.compare_item() in [1, None]:   # while moving right, swap
                     self.swap_item()                    # swap if item is larger or None
                 self.move_right()
-            if self.compare_item() == None: # If we reach the right and we are at None
+            if self.compare_item() == 1:
+                self.swap_item()
+            elif self.compare_item() == None: # If we reach the right and we are at None
                 self.set_light_off()       # Turn off light to break loop
                 break
 
+
             while self.can_move_left():
-                if self.compare_item() == 1: # if item is smaller
-                    self.swap_item()        # this if returns True and makes swap
-                elif self.compare_item() == None: # if we're moving left and encounter
+                if self.compare_item() == None: # if we're moving left and encounter
                     break               # None, everything to the left is already sorted 
                 self.move_left()
         return self._time

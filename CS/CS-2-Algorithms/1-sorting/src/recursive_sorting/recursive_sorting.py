@@ -103,6 +103,36 @@ def merge_sort_in_place( arr ):
 
 # STRETCH: implement the Timsort function below
 # hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
-def timsort( arr ):
-
+def insertion_sort(arr):
+    for i in range(len(arr)):
+        while arr[i] < arr[i-1] and i > 0:
+            arr[i], arr[i-1] = arr[i-1], arr[i]
+            i -= 1
+            #print(arr) # check after each insertion
     return arr
+
+
+def timsort(arr):
+    if len(arr) > 64:
+        left = timsort(arr[:len(arr)//2])
+        right = timsort(arr[len(arr)//2:])
+        return just_merge(insertion_sort(left),insertion_sort(right))
+    else:
+        return just_merge(insertion_sort(arr[:len(arr)//2]),insertion_sort(arr[len(arr)//2:]))
+
+def just_merge(arrA, arrB):
+    elements = len(arrA) + len(arrB)
+    merged_arr = []
+    for i in range(elements):
+        if len(arrA) == 0 or len(arrB) == 0:
+            break
+        elif arrA[0] < arrB[0]:
+            transfer = arrA.pop(0)
+        else:
+            transfer = arrB.pop(0)
+        merged_arr.append(transfer)
+        #print(merged_arr)
+    tail = arrA + arrB  # group what's left (an empty list and a sorted list)
+    merged_arr.extend(tail) # change final zeros to the tail
+    #print(merged_arr)
+    return merged_arr
