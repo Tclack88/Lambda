@@ -4,7 +4,7 @@ from random import seed, shuffle
 seed(5)
 arr = [0,1,2,3,5,8,13,21,34]
 shuffle(arr)
-print(arr)
+#print(arr)
 
 
 def quick_sort(arr):
@@ -21,5 +21,5 @@ def quick_sort(arr):
     return quick_sort(smaller) + [arr[pivot]] + quick_sort(larger)
 
 
-print(quick_sort(arr))
+#print(quick_sort(arr))
 
