@@ -72,31 +72,45 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        q = Queue()
+        q.enqueue(node) # Initialize queue with parent node
+        while q.len() > 0: # strategy: place left then right in a queue
+            node = q.dequeue() # deque and if that node has a children, recursively add
+            print(node.value)   # to the queue. This ensures breadth over depth
+            if node.left:
+                q.enqueue(node.left)
+            if node.right:
+                q.enqueue(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        stack = Stack()
+        stack.push(node) # Initialize stack with parent node
+        while stack.len() > 0: # strategy: place left then right on stack
+            node = stack.pop() # pop the stack and if that has "children", recurse
+            print(node.value)  # this ensures we go deeper rather than broader
+            if node.left:
+                stack.push(node.left)
+            if node.right:
+                stack.push(node.right)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        print(node.value)
+        if node.left != None:
+            self.pre_order_dft(node.left)
+        if node.right != None:
+            self.pre_order_dft(node.right)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if node.left != None:
+            self.post_order_dft(node.left)
+        if node.right != None:
+            self.post_order_dft(node.right)
+        print(node.value)
 
-bst = BinarySearchTree(1)
-bst.insert(8)
-bst.insert(5)
-bst.insert(7)
-bst.insert(6)
-bst.insert(3)
-bst.insert(4)
-bst.insert(2)
-
-bst.in_order_print(bst)
