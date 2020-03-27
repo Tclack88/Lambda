@@ -14,6 +14,7 @@ class Node:
     def set_next(self, new_next):
         # set this node's next_node reference to the passed in node
         self.next_node = new_next
+        return new_next
 
 
 class LinkedList:
@@ -46,10 +47,13 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        if self.head == None: # take care of empty case
+        if node == None: # take care of empty case
             return None
-        elif self.head.get_next() == None: # take care of single-value case
-            return self.head.get_value()
-        next_node = self.reverse_list(node.get_next(),node)
-        self.reverse_list(next_node,node)
-        next_node.set_next(node)
+        elif node.get_next() == None: # take care of single-value case or last link
+            self.head = node # convert node into new head
+            return node
+        # Otherwise we are in the middle of a multi-link list
+        next_node = node.get_next()
+        rev = self.reverse_list(next_node,None) # does not require previous
+        rev = rev.set_next(node) # instead return an output in set_next and tack on rev
+        return rev
