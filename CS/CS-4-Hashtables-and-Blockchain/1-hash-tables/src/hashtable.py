@@ -15,7 +15,8 @@ class HashTable:
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
         self.count = 0 # keep track of number of items
-        self.load_factor = .75
+        self.upper_load_factor = .7
+        self.lower_load_factor = .2
         self.storage = [None] * capacity
 
 
@@ -63,7 +64,7 @@ class HashTable:
         Fill this in.
         '''
         self.count += 1
-        if self.count / self.capacity >= self.load_factor:
+        if self.count / self.capacity > self.upper_load_factor:
             print("RESIZE CALLED")
             self.resize('up')
 
@@ -94,7 +95,7 @@ class HashTable:
             self.storage[index] = None  
             #TODO: deal with linked pairs under same hash
         self.count -= 1
-        if self.count / self.capacity < self.load_factor:
+        if self.count / self.capacity < self.lower_load_factor:
             print('resizing down!')
             self.resize('down')
 
