@@ -14,7 +14,8 @@ class HashTable:
     '''
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
-        #self.count = 0 # keep track of number of items
+        self.count = 0 # keep track of number of items
+        self.load_factor = .75
         self.storage = [None] * capacity
 
 
@@ -24,7 +25,7 @@ class HashTable:
 
         You may replace the Python hash with DJB2 as a stretch goal.
         '''
-        return hash(key)
+        return self._hash_djb2(key)#hash(key)
 
 
     def _hash_djb2(self, key):
@@ -33,7 +34,13 @@ class HashTable:
 
         OPTIONAL STRETCH: Research and implement DJB2
         '''
-        pass
+        # Take starting number, shift left by 5 bytes, add to that the original number
+        # add the first character of the key (byte char). Repeat until all chars used
+        byte_key = bytes(key, encoding='ascii')
+        hashed_key = 5381 # commonly chosen "arbitrary large prime"
+        for b in byte_key:
+            hashed_key = (hashed_key << 5) + hashed_key + b
+        return hashed_key
 
 
     def _hash_mod(self, key):
@@ -55,9 +62,10 @@ class HashTable:
 
         Fill this in.
         '''
-        #if self.count >= self.capacity:
-        #    #print("RESIZE CALLED")
-        #    self.resize()
+        self.count += 1
+        if self.count / self.capacity >= self.load_factor:
+            print("RESIZE CALLED")
+            self.resize('up')
 
         index = self._hash_mod(key) #self._hash(key) % self.capacity
         if self.storage[index] == None:
@@ -85,6 +93,10 @@ class HashTable:
         else:
             self.storage[index] = None  
             #TODO: deal with linked pairs under same hash
+        self.count -= 1
+        if self.count / self.capacity < self.load_factor:
+            print('resizing down!')
+            self.resize('down')
 
 
     def retrieve(self, key):
@@ -110,7 +122,7 @@ class HashTable:
 
 
 
-    def resize(self):
+    def resize(self, direction='up'):
         '''
         Doubles the capacity of the hash table and
         rehash all key/value pairs.
@@ -118,7 +130,15 @@ class HashTable:
         Fill this in.
         '''
         old_storage = self.storage # make copy of old storage
-        self.capacity *= 2 # double the allowed capacity
+
+        if direction == 'up':
+            self.capacity *= 2 # double the allowed capacity
+        elif direction == 'down' and self.capacity > 8:
+            self.capacity //= 2
+        else:
+            print("Not going lower than 8")
+            return
+
         new_storage = [None] * self.capacity
         self.storage = new_storage
         for item in old_storage:
@@ -132,10 +152,13 @@ class HashTable:
                     item.next = None
                     linked_pairs.append(item)
                     self.insert(item.key, item.value)
+                    self.count -= 1
                     item = next_item
                 # insert first and only item if while loop is skipped
                 # other wise add last item in while loop
+                self.count -= 1
                 self.insert(item.key, item.value)
+        print('storage after resize:', len(self.storage))
             
 
 
