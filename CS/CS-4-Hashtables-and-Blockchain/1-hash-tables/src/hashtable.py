@@ -14,6 +14,7 @@ class HashTable:
     '''
     def __init__(self, capacity):
         self.capacity = capacity  # Number of buckets in the hash table
+        #self.count = 0 # keep track of number of items
         self.storage = [None] * capacity
 
 
@@ -54,7 +55,19 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        #if self.count >= self.capacity:
+        #    #print("RESIZE CALLED")
+        #    self.resize()
+
+        index = self._hash_mod(key) #self._hash(key) % self.capacity
+        if self.storage[index] == None:
+            self.storage[index] = LinkedPair(key,value)
+        else:
+            # add new pair to existing index entry (old pair)
+            old_pair = self.storage[index]
+            new_pair = LinkedPair(key,value)
+            new_pair.next = old_pair
+            self.storage[index] = new_pair
 
 
 
@@ -66,7 +79,12 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key) #self._hash(key) % self.capacity
+        if self.storage[index] == None:
+            print(f'key: "{key}" not found')
+        else:
+            self.storage[index] = None  
+            #TODO: deal with linked pairs under same hash
 
 
     def retrieve(self, key):
@@ -77,7 +95,19 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        index = self._hash_mod(key) #self._hash(key) % self.capacity
+        if self.storage[index] == None:
+            return None
+        else:
+            item = self.storage[index]
+            while True:
+                if item.key == key: # check if key is this item, return value if true
+                    return item.value
+                if item.next == None: # break out if there's no next item
+                    return None
+                item = item.next # if next item exists, recheck loop
+                
+
 
 
     def resize(self):
@@ -87,8 +117,26 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
-
+        old_storage = self.storage # make copy of old storage
+        self.capacity *= 2 # double the allowed capacity
+        new_storage = [None] * self.capacity
+        self.storage = new_storage
+        for item in old_storage:
+            if item != None:
+                # All objects in linked list would have the same mod because
+                # they share the same hash. So the whole object, chained or not
+                # can be moved to the index (which is the same as that of the 1st item)
+                linked_pairs = []
+                while item.next != None: # check for item.next's insert into new array
+                    next_item = item.next
+                    item.next = None
+                    linked_pairs.append(item)
+                    self.insert(item.key, item.value)
+                    item = next_item
+                # insert first and only item if while loop is skipped
+                # other wise add last item in while loop
+                self.insert(item.key, item.value)
+            
 
 
 if __name__ == "__main__":
