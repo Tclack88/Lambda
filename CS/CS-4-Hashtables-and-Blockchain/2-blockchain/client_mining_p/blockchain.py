@@ -151,6 +151,7 @@ def mine():
         print('New block added')
         previous_hash = blockchain.hash(blockchain.last_block)
         block = blockchain.new_block(data['proof'], previous_hash) 
+        blockchain.valid_proof(block, data['proof']) == True # check 
     except ValueError:
         response = {'message': 'You are a failure in life!'}
         code = 400

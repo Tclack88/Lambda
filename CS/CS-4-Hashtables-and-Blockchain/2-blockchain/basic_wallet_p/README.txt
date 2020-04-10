@@ -10,3 +10,11 @@ This app should:
 Stretch Goals:
     * Use styling to visually distinguish coins sent and coins received
     * Paginate the list of transactions if there are more than ten
+
+
+NOTE: This sort of satisfies the goals.... it's good enough
+INSTRUCTIONS: Run 3 scripts in their own terminal:
+
+- blockchain.py  -- optional open localhost:5000/chain
+- miner.py
+- wallet.py -- open localhose:5001 and make transactions
