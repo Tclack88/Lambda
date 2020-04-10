@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>basic wallet</title>
+  </head>
+  <body>
+	  <h1><a href-'/'>ClackCoin</a></h1>
+    <p>Enter your information to perform a transaction</p>
+    <form action="/new_transaction" method="post">
+      <input type="text" placeholder="sender" name="sender">
+      <input type="text" placeholder="recipient" name="recipient">
+      <input type="text" name="amount" placeholder="amount">
+      <input type='submit' value='Make transaction'>
+    </form>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

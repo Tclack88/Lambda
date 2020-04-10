@@ -125,10 +125,11 @@ blockchain = Blockchain()
 
 @app.route('/last_block', methods=['GET']) # GET, NOOOT POST
 def last_block():
-    print(blockchain.last_block)
     return jsonify(blockchain.last_block), 200
 
-@app.route('/transactions/new', methods=['POST']) # GET, NOOOT POST
+
+#@app.route('/transactions/new', methods=['POST']) # GET, NOOOT POST
+@app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     values = request.get_json()
 
@@ -141,7 +142,10 @@ def new_transaction():
             values['recipient'],
             values['amount'])
 
-    response = {'message': f"Transaction will be added to Block {index}"}
+    chain = blockchain.chain
+
+    response = {'message': f"Transaction will be added to Block {index}",
+                'chain': chain}
     return jsonify(response), 200
 
 
@@ -154,10 +158,11 @@ def mine():
 
     try:
         data['proof'] and data['id']
-        blockchain.new_transaction(sender='0', recipient=data['id'], amount=1) # reward
+        blockchain.new_transaction(sender='0', recipient=data['id'].strip(), amount=1) 
+        # ^  reward
         response = {'message': 'You found a blockchain thingy!'}
         code = 200
-        print('New block added')
+        #print('New block added')
         previous_hash = blockchain.hash(blockchain.last_block)
         block = blockchain.new_block(data['proof'], previous_hash) 
         blockchain.valid_proof(block, data['proof']) == True # check 

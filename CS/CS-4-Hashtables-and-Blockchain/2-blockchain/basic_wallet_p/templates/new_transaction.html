@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<hr>
+  <h2>Transaction Status</h2>
+    <p> message: {{ message }}
+    </p>
+
+  <h2>Transaction History</h2>
+  <!-- pass in text as list of return string, add each to new paragraphs -->
+  {% for para in text %}
+  <p> {{ para }} </p>
+  {% endfor %}
+{% endblock %}
