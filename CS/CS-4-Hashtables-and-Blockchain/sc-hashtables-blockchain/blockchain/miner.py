@@ -26,7 +26,6 @@ def proof_of_work(last_proof):
     proof = 0
     #  TODO: Your code here
     while not valid_proof(last_proof, proof):
-        #proof += 1
         proof = 1000*random.random()#randint(0,500000)
 
 
@@ -44,10 +43,12 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    guess = f"{last_hash}{proof}".encode()
+    # NOTE: name "last_hash" is misleading, it's actually the "last hash's proof"
+    # so we need to actually get that hash and put it here
+    last_hash = hashlib.sha256(str(last_hash).encode()).hexdigest()
+    guess = f"{proof}".encode()
     new_hash = hashlib.sha256(guess).hexdigest()
-
-    return str(last_hash)[-5:] == new_hash[:5]
+    return last_hash[-5:] == new_hash[:5]
 
 
 if __name__ == '__main__':
@@ -55,8 +56,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         node = sys.argv[1]
     else:
-        #node = "https://lambda-coin.herokuapp.com/api"
-        node = "https://lambda-coin-test-1.herokuapp.com/api"
+        node = "https://lambda-coin.herokuapp.com/api"
+        #node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
