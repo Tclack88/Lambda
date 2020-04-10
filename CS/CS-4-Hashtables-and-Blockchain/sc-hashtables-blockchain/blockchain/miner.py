@@ -26,7 +26,8 @@ def proof_of_work(last_proof):
     proof = 0
     #  TODO: Your code here
     while not valid_proof(last_proof, proof):
-        proof = random.randint(0,500000)
+        #proof += 1
+        proof = 1000*random.random()#randint(0,500000)
 
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
@@ -45,9 +46,8 @@ def valid_proof(last_hash, proof):
     # TODO: Your code here!
     guess = f"{last_hash}{proof}".encode()
     new_hash = hashlib.sha256(guess).hexdigest()
-    print('last_hash type', type(last_hash))
-    print('new_hash type',type(new_hash))
-    return last_hash[:-5] == new_hash[5:]
+
+    return str(last_hash)[-5:] == new_hash[:5]
 
 
 if __name__ == '__main__':
@@ -55,7 +55,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         node = sys.argv[1]
     else:
-        node = "https://lambda-coin.herokuapp.com/api"
+        #node = "https://lambda-coin.herokuapp.com/api"
+        node = "https://lambda-coin-test-1.herokuapp.com/api"
 
     coins_mined = 0
 
@@ -74,7 +75,6 @@ if __name__ == '__main__':
         r = requests.get(url=node + "/last_proof")
         data = r.json()
         new_proof = proof_of_work(data.get('proof'))
-
         post_data = {"proof": new_proof,
                      "id": id}
 
