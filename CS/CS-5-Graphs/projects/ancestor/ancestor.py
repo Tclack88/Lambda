@@ -27,7 +27,7 @@ def earliest_ancestor(ancestors, starting_node):
                 go_deep(g, child, level)
 
     go_deep(g, node, level)
-    
+    print(level_children_map)
     deepest = max(level_children_map.keys()) # largest key = deepest level
     if deepest == 0:
         return -1
