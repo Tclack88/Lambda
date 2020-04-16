@@ -160,25 +160,17 @@ class Graph:
 
 		This should be done using recursion.
 		"""
-		if starting_vertex not in visited: # Add to visited list if 1st time
+		if starting_vertex not in visited:
 			visited.append(starting_vertex)
-		if destination_vertex == starting_vertex: 	# the money: the return
-			print('at destination:', visited)		# we want
+		if destination_vertex == starting_vertex:
+			print('at destination:', visited)
 			return visited
 		neighbors = self.get_neighbors(starting_vertex)
-		for neighbor in neighbors: # recurse on neighbors
+		for neighbor in neighbors:
 			if neighbor not in visited:
 				ret = self.dfs_recursive(neighbor,destination_vertex, visited.copy())	
-				if ret != None: # shoutout to Mark Halls for this tip.
-					return ret  # after the inner money return is found,
-								# we the outer stack calls will return
-								# 'None'. Since python recursive functions
-								# will only return the return value of the
-								# first object in the stack call and we
-								# don't want that junk, we only return
-								# if they're not None (i.e. junk)
-				# unnecessary next step, just saves time from finding
-				# other paths
+				if ret != None:
+					return ret
 				if neighbor == destination_vertex:
 					break
 
