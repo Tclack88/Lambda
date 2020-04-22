@@ -10,6 +10,14 @@ class CPU:
         self.pc = 0 # process counter
         self.ram = [0]*256 # Initialize 8 byte ram (array of 0's)
         self.reg = [0] * 8 # Initialize register values (array of 0's)
+        # map the bytes to a class method
+        self.instruction_map = {
+            0b10000010: self.handle_LDI, # LDI (load instruction)
+            0b00000001: self.handle_HLT, # HLT (Hault)
+            0b01000111: self.handle_PRN, # PRN (print)
+            0b10100010: self.handle_MUL  # MUL (multiply)
+            }
+
 
     def load(self):
         """Load a program into memory."""
@@ -17,20 +25,19 @@ class CPU:
         address = 0
 
         # For now, we've just hardcoded a program:
-
-        program = [
-            # From print8.ls8
-            0b10000010, # LDI R0,8
-            0b00000000,
-            0b00001000,
-            0b01000111, # PRN R0
-            0b00000000,
-            0b00000001, # HLT
-        ]
-
-        for instruction in program:
-            self.ram[address] = instruction
-            address += 1
+        program_file = sys.argv[1]
+        with open(program_file) as f:
+            for instruction in f:
+                # each line is a string if a comment (#) is inline of an
+                # instruction, remove it and return the 0th item (the instr.)
+                # otherwise a line that is a comment or blank, ignore it
+                instruction  = instruction.split('#')[0].strip()
+                if instruction == '':
+                    continue
+                # append to ram
+                self.ram_write(address, int(instruction, 2))
+                address += 1
+                 
     
     def ram_read(self, address):
         return self.ram[address]
@@ -43,7 +50,8 @@ class CPU:
 
         if op == "ADD":
             self.reg[reg_a] += self.reg[reg_b]
-        #elif op == "SUB": etc
+        elif op == "MUL":
+            self.reg[reg_a] *= self.reg[reg_b]
         else:
             raise Exception("Unsupported ALU operation")
 
@@ -65,38 +73,35 @@ class CPU:
         for i in range(8):
             print(" %02X" % self.reg[i], end='')
 
-        print()
-
-    def LDI(self, adr, val):
+    def handle_LDI(self):
+        adr = self.ram_read(self.pc + 1)
+        val = self.ram_read(self.pc + 2)
         self.reg[adr] = val # set specified register variable to value
+        self.pc += 3
+
+    def handle_PRN(self):
+        val = self.reg[self.ram_read(self.pc + 1)]
+        print(val)
+        self.pc += 2
+
+    def handle_HLT(self):
+        print('program exiting')
+        exit()
+
+    def handle_MUL(self):
+        val1 = self.ram_read(self.pc + 1)
+        val2 = self.ram_read(self.pc + 2)
+        self.pc += 3
+        self.alu('MUL',val1, val2)
 
     def run(self):
         """Run the CPU."""
         while True:
-            # Instruction map is a dictionary mapping the byte value to
-            # a tuple (function, arg1, arg2)
-            instruction_map = {
-                    0b10000010: (self.LDI, # lambda function not working :/
-                    #(lambda adr, val: exec('self.reg[adr] = val'), 
-                    self.reg[self.ram[self.pc + 1]], 
-                    self.ram[self.pc + 2]), # LDI (load instruction)
-                0b00000001: (exit, None, None), # HLT (Hault)
-                0b01000111: (print, 
-                    self.reg[self.ram[self.pc + 1]], 
-                    None), # PRN (print)
-                }
-
             ir = self.ram_read(self.pc)
-            # unpack tuple
-            function, operand_a, operand_b = instruction_map[ir]
-
-            if operand_b is not None:
-                self.pc += 3
-                function(operand_a, operand_b)
-            elif operand_a is not None:
-                self.pc += 2
-                function(operand_a)
-            else:
-                self.pc += 1
-                function()
+            # map ir to function and execute
+            function = self.instruction_map[ir]
+            if function == None:
+                print(f'Instruction: {int(ir, 2)}, not understood')
+                self.instruction_map[0] # call exit instruction
+            function()
 
