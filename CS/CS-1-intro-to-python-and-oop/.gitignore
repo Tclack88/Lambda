@@ -1,0 +1,7 @@
+.vscode
+<<<<<<< HEAD
+*.pyc
+__pycache__
+=======
+*.sw[op]
+>>>>>>> tmptmp_rfpBPYyljl/master
