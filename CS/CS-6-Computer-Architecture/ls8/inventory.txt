@@ -1,0 +1,16 @@
+:::: ls8 directory ::::
+
+cpy.py: this is our primary workspot. It already has a finished `load` function which adds instructions into memory. Other methods are alu, trace and run
+
+
+ls8.py: Where wer call, load and execute our cpu emoulator from
+
+exampes directory: working ".ls8" files which contain instructions for the various programs we will run
+
+ls8 cheatsheet: a tldr for the spec file
+
+ls8 spec: glossary-like file describing what the ls8 commands ought to do
+
+
+:::: asm directory ::::
+various javascript and8 bit assembly files. This apparently allows .asm programs to be converted to .ls8 programs 
